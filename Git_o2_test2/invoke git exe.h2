@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<H2>
+  <SourceCode>
+Action&lt;string,string,Action&lt;string&gt;&gt; executeGitCommand = 
+	(gitCommands,gitDir,  onDataReceived)=&gt; {
+									if (gitDir.valid())
+										gitCommands = "--git-dir=\"{1}\" {0}".format(gitCommands, gitDir);
+									"executing git.exe with arguments: {0}".info(gitCommands);
+									var gitExe = @"C:\Program Files\Git\bin\git.exe";						
+									gitExe.startProcess(gitCommands, onDataReceived); 
+								};
+var topPanel = panel.clear().add_Panel();
+
+var response_TextArea = topPanel.add_TextArea();   
+var directory = topPanel.insert_Right&lt;Panel&gt;(200).add_Directory();  
+TextBox workDirectory = null;
+var commands = response_TextArea.insert_Left&lt;Panel&gt;(300).add_GroupBox("Executed Commands").add_TreeView();
+
+Action&lt;string&gt; executeCommand = 
+	(command)=&gt; {
+					response_TextArea.set_Text("");
+					var treeNode = commands.insert_TreeNode(command,"kk", 0);  
+					var responseData = "";
+					var gitDir = workDirectory.get_Text().createDir();
+					directory.open(gitDir);
+					executeGitCommand(command, gitDir,
+						(data)=&gt;{
+									responseData += data.line();
+									treeNode.set_Tag("a" + "responseData");  
+									response_TextArea.append_Line(data); 
+									//show.info(treeNode);
+								});
+				};
+				
+commands.afterSelect&lt;string&gt;((text)=&gt; { response_TextArea.set_Text("1" + text);show.info(commands.selected());} ); 
+
+response_TextArea.insert_Above&lt;Panel&gt;(20 )
+				 .add_LabelAndTextAndButton("execute git.exe command","--help","exec",executeCommand);
+
+
+ 
+var commonCommands = commands.parent().insert_Above&lt;Panel&gt;(150).add_GroupBox("Config and Common Commands").add_Panel();
+workDirectory = commonCommands.add_TextBox("Work Directory","");  
+Action&lt;string, int, int, string&gt; add_CommandLink = 
+	(commandText, x, y, gitCommand)=&gt;{
+										commonCommands.add_Link(commandText, x,y, ()=&gt; executeCommand(gitCommand));
+									 };
+
+add_CommandLink("help", 40,0, "--help");
+add_CommandLink("init", 40,50, "init"); 
+
+executeCommand("--help");
+workDirectory.set_Text(@"C:\O2\Git_Repositories");
+workDirectory.set_Text(@"C:\O2\Git_Repositories\o2-scripts-tests");
+
+
+return "";
+//return  gitExe.startProcess_getConsoleOut(gitExeParams); 
+
+return "done";
+//var cmdApi = new CmdExeApi(gitExe, GitExeParams , (data)=&gt; data.info());
+//return cmdApi.start();
+//O2File:CmdExeApi.cs 
+
+panel.clear();
+var ie = panel.add_IE().silent(true);
+ie.onNavigate((url)=&gt; url.info());
+
+return "ok";
+
+
+//O2File:WatiN_IE_ExtensionMethods.cs
+//using O2.XRules.Database.Utils.O2
+//O2Ref:WatiN.Core.1x.dll
+//O2Ref:Interop.SHDocVw.dll</SourceCode>
+  <ReferencedAssemblies />
+</H2>
