@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<H2>
+  <SourceCode>// persist the ie objects accross multiple executions
+var ie = panel.tag&lt;WatiN_IE&gt;();
+//ie= null;
+if (ie == null) 
+{
+	panel.clear();
+	ie = panel.add_IE();
+	panel.tag(ie);
+} 
+
+
+// *********** &lt;start of IE automation script&gt;  ***********
+if (ie.url().inValid())
+	ie.open("http://openetherpad.org/X5q3Mblptn");
+
+var field = ie.field("chatentrybox").value("test6a".line());
+panel.focus(); 
+panel.invokeOnThread(()=&gt; field.Click());
+//panel.sendKeys("{ENTER}"); 
+//O2Thread.staThread(()=&gt;
+//{
+//	System.Windows.Forms.SendKeys.SendWait("{ENTER}"); 
+//});
+System.Windows.Forms.SendKeys.SendWait("aa"); 
+System.Windows.Forms.SendKeys.SendWait("{ENTER}"); 
+this.sleep(2000); 
+System.Windows.Forms.SendKeys.SendWait("bb"); 
+System.Windows.Forms.SendKeys.SendWait("{ENTER}"); 
+this.sleep(2000); 
+System.Windows.Forms.SendKeys.SendWait("cc"); 
+System.Windows.Forms.SendKeys.SendWait("{ENTER}"); 
+return "ok";	
+	
+var iFrame =  ie.IE.Frames;
+var div2 = ie.div("editorcontainer").elements()[1]; 
+var frame = (HTMLIFrameClass)div2.htmlElement();
+foreach(var property in frame.type().properties())
+	"{0} = {1}".info(property.Name, frame.property(property.Name)); 
+return "ok";
+//var iFrame =  ie.div("editorcontainer").elements&lt;WatiN.Core.Frame&gt;();
+		 //.elements("IFRAME")
+		 //.first();
+return iFrame[1].Html ;		 
+//return (iFrame is  WatiN.Core.Frame);		  
+//return ie.IE.Frames[0].Body;
+
+foreach(var div in ie.divs())
+{
+	var innerHtml = div.innerHtml();
+	if (innerHtml.notNull() &amp;&amp; innerHtml.contains("Welcome"))
+		return "found";
+	else 
+		innerHtml.info();
+}		
+return "ok";
+return ie.div("editorcontainer").innerHtml();
+return ie.field("chatentrybox").value("test2".line());//.line());
+return ie.fields();
+
+return ie.images().urls();  
+
+
+// *********** &lt;end of IE automation script&gt;  ***********
+
+//using O2.XRules.Database.APIs
+//using O2.XRules.Database.Utils.O2
+//using mshtml
+
+//O2File:Ref:WatiN_IE_ExtensionMethods.cs 
+//O2Ref:WatiN.Core.1x.dll
+//O2Ref:Microsoft.mshtml.dll</SourceCode>
+  <ReferencedAssemblies />
+</H2>

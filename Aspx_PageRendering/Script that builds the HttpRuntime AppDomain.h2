@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<H2>
+  <SourceCode>//return AppDomain.CurrentDomain.Id; 
+
+var targetDir = @"C:\O2\_XRules_Local\_localAspPoCs_2\"; 	 	
+var webServer = new O2.Script.WebServer(targetDir);
+webServer.copyToBinFolder(@"C:\O2\_tempDir\3-25-2011\tmp5C03.tmp.dll");
+webServer.copyToBinFolder(@"C:\O2\_tempDir\3-25-2011\tmp5C03.tmp.pdb");
+webServer.copyToBinFolder("O2_Views_ASCX.dll".localExeFolder());
+webServer.copyToBinFolder("O2_API_AST.dll".localExeFolder());
+webServer.copyToBinFolder("O2SharpDevelop.dll".localExeFolder());
+webServer.copyToBinFolder("O2_DotNetWrappers.dll".localExeFolder());
+webServer.copyToBinFolder("O2_Views_ASCX.dll".localExeFolder());
+webServer.copyToBinFolder("O2_External_SharpDevelop.dll".localExeFolder());
+webServer.copyToBinFolder("O2_Interfaces.dll".localExeFolder());
+webServer.copyToBinFolder("O2_Kernel.dll".localExeFolder());
+
+
+ 
+webServer.createHost(); 
+return webServer.executeRequest(); 
+return "ok"; 
+   
+//this needs to be updated with the latest compilation result
+//O2Ref:C:\Users\o2\AppData\Local\Temp\a4br5mbc.dll
+
+//using O2.Script </SourceCode>
+  <ReferencedAssemblies />
+</H2>

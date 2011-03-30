@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<H2>
+  <SourceCode>//return "return \"12\";".base64Encode().base64Decode(); 
+//return "return \"12\";".execute_InScriptEditor_InSeparateAppDomain();
+ 
+//return "ok";
+
+var targetDir = @"C:\O2\_XRules_Local\_localAspPoCs_2\"; 	 	
+var file = @"C:\O2\_XRules_Local\H2Scripts\aspCompile.cs";
+
+
+
+//O2Ref:C:\O2\_tempDir\3-25-2011\tmp7154.tmp.dll  
+
+//var webServer2 = new WebServer(targetDir); 			
+//return webServer2.executeRequest("a.aspx");
+
+
+
+//__O2Ref:C:\O2\_XRules_Local\_localAspPoCs_2\bin\r6z3watk.dll  
+//__O2File:C:\O2\_XRules_Local\H2Scripts\aspCompile.cs  
+var topPanel = panel.clear().add_Panel();  
+var sidePanel = topPanel.insert_Left&lt;Panel&gt;(200);
+var codeEditor = topPanel.add_SourceCodeEditor(); 
+ 
+
+var compiledDll = ""; 
+
+codeEditor.open(@"C:\O2\_XRules_Local\H2Scripts\aspCompile.cs"); 
+
+var script = codeEditor.insert_Right&lt;Panel&gt;(500).add_Script();   
+script.Code = "\"hello\".info();";
+//using System.Web.Hosting 
+ 
+Action compile =  
+	()=&gt;{
+			"starting compilation process".debug(); 
+			
+			var compileScript = @"var file = @""C:\O2\_XRules_Local\H2Scripts\aspCompile.cs"";".line() + 
+								"return file.compile().Location;";
+			compileScript.execute_InScriptEditor_InSeparateAppDomain();			
+		}; 
+		
+Action startWebServer =
+	()=&gt;{
+			var webServer3 = new WebServer(targetDir); 			 
+			//show.info(webServer3);
+			"compiled dll:{0}".info(compiledDll);
+			var webServer = compiledDll.assembly().type("WebServer").ctor(targetDir);
+			//show.info(webServer);
+ 			
+		};
+
+Action executeInAppDomain =  
+	()=&gt;{
+			var scriptToExecute = script.commandsToExecute.get_Text();
+			"executing : {0}".info(scriptToExecute);
+			scriptToExecute.executeScriptInSeparateAppDomain(true,true); 
+		};
+
+sidePanel.add_Link("Compile",100,0, ()=&gt;compile())
+		 .append_Link("Start WebServer", ()=&gt; startWebServer())
+		 .append_Link("executeInAppDomain", ()=&gt; executeInAppDomain());
+
+
+return "done";
+			
+//using O2.External.SharpDevelop.Ascx;
+
+//return codeEditor.compile();
+var dir = @"C:\O2\_XRules_Local\_localAspPoCs_2\"; 
+
+
+//using O2.Script 
+
+//webServer.callCallback();
+
+//return HttpContext.Current;
+//return WebServer.WebServerHost; 
+//*/
+//O2File:Scripts_ExtensionMethods.cs
+return "ok";
+</SourceCode>
+  <ReferencedAssemblies />
+</H2>

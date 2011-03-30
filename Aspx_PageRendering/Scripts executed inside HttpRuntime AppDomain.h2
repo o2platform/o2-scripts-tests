@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<H2>
+  <SourceCode>//return simpleWorkerRequest.field("_output").str();
+
+var Page = "a.aspx";
+var stringWriter = new StringWriter();
+var mySimpleWorkerRequest = new SimpleWorkerRequest(Page, string.Empty, stringWriter);
+var httpContext = new HttpContext(mySimpleWorkerRequest);
+
+//var property = PublicDI.reflection.getPropertyInfo("IsReadOnly", httpContext.Request.QueryString.type());  
+//PublicDI.reflection.setProperty(property, httpContext.Request.QueryString,false);    
+//return ,false);  
+httpContext.Request.QueryString.property("IsReadOnly", false);   // make the queryString readWrite
+httpContext.Request.QueryString.Add("test","1234");
+
+HttpRuntime.ProcessRequest(mySimpleWorkerRequest);
+stringWriter.str().info();
+mySimpleWorkerRequest.field("_queryString","aa=12");
+//return httpContext.Request.QueryString;
+
+var stringWriter2 = new StringWriter();
+mySimpleWorkerRequest.field("_output",stringWriter2); 
+HttpRuntime.ProcessRequest(mySimpleWorkerRequest);
+stringWriter2.str().info();
+return stringWriter.str();
+
+//return simpleWorkerRequest.GetRawUrl();
+
+//var httpContext = new HttpContext(simpleWorkerRequest);
+
+//show.info(httpContext.Request);
+//show.info(httpContext.Response); 
+//return httpContext.Response.OutputStream;
+
+//using System.IO
+//using System.Web
+//using System.Web.Hosting</SourceCode>
+  <ReferencedAssemblies />
+</H2>

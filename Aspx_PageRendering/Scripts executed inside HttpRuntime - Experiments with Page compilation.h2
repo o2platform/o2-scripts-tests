@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<H2>
+  <SourceCode>var context = new HttpContext(simpleWorkerRequest); 
+var virtualPath = "System.web".assembly().type("VirtualPath").ctor("/a.aspx"); 
+
+
+HttpContext.Current = context;
+
+//using System.Reflection 
+
+//return simpleWorkerRequest.field("_output").str();
+
+
+			//BuildResultCompiledType buildResultCompiledType = (BuildResultCompiledType)BuildManager.GetVPathBuildResult(context, virtualPath, false, true, true);
+			//result = (IHttpHandler)HttpRuntime.CreatePublicInstance(buildResultCompiledType.ResultTyp
+
+//O2Ref:System.Web.dll
+//using System.Web.Compilation
+//using System.Web.UI
+//using System.Web
+//using System.Web.Configuration
+
+
+var pageParser = new PageParser();
+var templateParser = (TemplateParser)pageParser; 
+//var virtualPath = "System.web".assembly().type("VirtualPath").ctor("/a.aspx"); 
+templateParser.property("CurrentVirtualPath",virtualPath); 
+
+
+
+try
+{
+	templateParser.invoke("Parse");
+}
+catch(Exception ex)
+{ 
+	ex.log();
+}
+return templateParser.property("RootBuilder");
+return templateParser.field("_pageParserFilter"); 
+"PageObjectList".info(); return templateParser.property("PageObjectList");       
+//var compilerOptions = (System.CodeDom.Compiler.CompilerParameters)templateParser.property("CompilParams");
+//return compilerOptions;
+ 
+
+//"RequiresCompilation".info(); return templateParser.property("RequiresCompilation");      
+
+"RootBuilder".info();return templateParser.property("RootBuilder");     
+
+"SessionObjects".info();
+return templateParser.property("SessionObjects");     
+return templateParser.property("ScriptList");     
+return templateParser.field("_sourceDependencies");    
+
+return templateParser.property("Text");
+
+return templateParser.property("CurrentVirtualPath"); 
+return pageParser.type().baseTypes() ; 
+
+//var context = new HttpContext(simpleWorkerRequest); 
+
+/*var buildManager = typeof(BuildManager);
+
+
+var virtualPath = "System.web".assembly().type("VirtualPath").ctor("/a.aspx"); 
+var buildResult = buildManager.invokeStatic("GetVPathBuildResult",context, virtualPath, false, true, true);
+
+return buildResult; 
+*/
+//var file = @"C:\O2\_XRules_Local\_localAspPoCs_2\Hello_World.aspx";
+
+HttpContext.Current = context;
+var aspx = @"C:\O2\_XRules_Local\_localAspPoCs_2\a.aspx"; 
+object view = BuildManager.CreateInstanceFromVirtualPath("\\a.aspx", typeof(object));
+
+return view.type().baseTypes();
+
+//_client.PrecompileApplication(new O2.Script.CompilerCallback()); 
+//O2File:C:\_WorkDir\SI\O2_Scripts\temp\compiler_callback.cs
+//return _client;
+
+/*
+this works
+
+var file = @"C:\O2\_XRules_Local\_localAspPoCs_2\a.aspx";
+var virtualPath ="Hello_World.aspx";
+var compiledPage = PageParser.GetCompiledPageInstance(virtualPath, file, context);
+return compiledPage;
+*/
+return context;
+ 
+
+var Page = "a.aspx";
+var stringWriter = new StringWriter();
+var mySimpleWorkerRequest = new SimpleWorkerRequest(Page, string.Empty, stringWriter);
+var httpContext = new HttpContext(mySimpleWorkerRequest);
+
+//var property = PublicDI.reflection.getPropertyInfo("IsReadOnly", httpContext.Request.QueryString.type());  
+//PublicDI.reflection.setProperty(property, httpContext.Request.QueryString,false);    
+//return ,false);  
+httpContext.Request.QueryString.property("IsReadOnly", false);   // make the queryString readWrite
+httpContext.Request.QueryString.Add("test","1234");
+
+HttpRuntime.ProcessRequest(mySimpleWorkerRequest);
+stringWriter.str().info();
+mySimpleWorkerRequest.field("_queryString","aa=12");
+//return httpContext.Request.QueryString;
+
+var stringWriter2 = new StringWriter();
+mySimpleWorkerRequest.field("_output",stringWriter2); 
+HttpRuntime.ProcessRequest(mySimpleWorkerRequest);
+stringWriter2.str().info();
+return stringWriter.str();
+
+//return simpleWorkerRequest.GetRawUrl();
+
+//var httpContext = new HttpContext(simpleWorkerRequest);
+
+//show.info(httpContext.Request);
+//show.info(httpContext.Response); 
+//return httpContext.Response.OutputStream;
+
+//using System.IO
+//using System.Web
+//using System.Web.Hosting</SourceCode>
+  <ReferencedAssemblies />
+</H2>
