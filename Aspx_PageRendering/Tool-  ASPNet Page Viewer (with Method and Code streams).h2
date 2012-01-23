@@ -176,6 +176,12 @@ actionsPanel.add_Link("view all codeblocks",0,0, ()=&gt; viewAllCodeBlocks())
 						var aspNetPage = (AspNet_Page)files.selected().get_Tag();
 						aspNetPage.AspNet_Compiled_SourceCode[0].showInCodeEditor(); 
 					})
+			.append_Link("Compile project", 
+				()=&gt;{
+						var msBuild = @"C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe"; 
+						var parameters = @"c:\o2\demos\webclient\WebClient.sln";
+						msBuild.startProcess(parameters,(log)=&gt; log.info()); 
+					})
 			.append_Link("refresh IE", ()=&gt;ie.open_ASync(ie.url()));
 
 
@@ -183,7 +189,6 @@ actionsPanel.add_Link("view all codeblocks",0,0, ()=&gt; viewAllCodeBlocks())
 
 // Load previously created SavedMethodStreams (using cache)
 var folderWithMethodStreams = @"C:\_WorkDir\SI\O2 Data\WebSite_Library_MethodStreams_ALL2_";
-folderWithMethodStreams = @"C:\_WorkDir\SI\O2 Data\WebSite_Library_MethodStreams_ALL_3";
 try
 {
 	ascxCodeStreams.AllSavedMethodStreams = (List&lt;Saved_MethodStream&gt;)O2.Kernel.O2LiveObjects.get("AllSavedMethodStreams");
